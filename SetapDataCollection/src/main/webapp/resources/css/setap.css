@@ -1,0 +1,96 @@
+#dt_example {
+	font: 80%/1.45em "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	color: #333;
+	background-color: #fff;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+span.tab{
+    padding: 0 80px; /* Or desired space*/
+}
+
+#mainDiv {
+    height: 100%;
+}
+
+label {
+    display: block;
+}
+
+.mycontent-left {
+  border-right: 3px solid #333;
+}
+
+.mainMenu {
+    height: 60%;
+    margin-left: 0%;
+    background: yello;
+}
+
+.header {
+    height: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    background: pink;
+}
+
+.footer {
+    height: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    background: pink;
+}
+
+.page_title {
+    min-height: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    background: red;
+}
+
+.btn-center-login {
+	display: block;
+	width: 20%;
+	margin-left: 40%;
+	margin-right: 40%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+.btn-right-submit {
+	display: block;
+	width: 20%;
+	margin-left: 70%;
+	margin-right: 10%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box
+}
+
+.radio-inline,.checkbox-inline {
+	display: inline-block;
+	padding-top: 10px;
+	margin-bottom: 0;
+	vertical-align: middle
+}
+
+.page_content {
+	margin-left: 10%;
+    margin-right: 10%;
+    min-height: 100%;
+    background: Lavender;
+}
+
+.row{
+  margin-top: 10px;
+  margin-bottom: 0;
+}
