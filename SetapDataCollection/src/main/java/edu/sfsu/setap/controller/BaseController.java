@@ -8,22 +8,67 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import edu.sfsu.setap.model.CheckPointBean;
 import edu.sfsu.setap.model.InstructionLogBean;
 import edu.sfsu.setap.db.DBConnectionUtil;
+import edu.sfsu.setap.exception.CustomGenericException;
 
 @Controller
 @RequestMapping("/")
 public class BaseController {
 
+	
+	
+	@RequestMapping(value = "/{type:.+}", method = RequestMethod.GET)
+	public ModelAndView getPages(@PathVariable("type") String type)
+		throws Exception {
+ 
+	  if ("error".equals(type)) {
+		// go handleCustomException
+		throw new CustomGenericException("E888", "This is custom message");
+	  } else if ("io-error".equals(type)) {
+		// go handleAllException
+		throw new IOException();
+	  } else {
+		return new ModelAndView("error").addObject("msg", type);
+	  }
+ 
+	}
+	
+	
+	@ExceptionHandler(CustomGenericException.class)
+	public ModelAndView handleCustomException(CustomGenericException ex) {
+ 
+		ModelAndView model = new ModelAndView("error/generic_error");
+		model.addObject("errCode", ex.getErrCode());
+		model.addObject("errMsg", ex.getErrMsg());
+ 
+		return model;
+ 
+	}
+ 
+	@ExceptionHandler(Exception.class)
+	public ModelAndView handleAllException(Exception ex) {
+ 
+		ModelAndView model = new ModelAndView("error/generic_error");
+		model.addObject("errMsg", ex.getLocalizedMessage());
+		
+		return model;
+ 
+	}
+	
+	
+	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public ModelAndView test(HttpServletRequest request,
 			HttpServletResponse response) {
 
-		ModelAndView model = new ModelAndView("temp");
+		ModelAndView model = new ModelAndView("error");
 
 		return model;
 
@@ -54,9 +99,45 @@ public class BaseController {
 		}
 		return model;
 	}
-
+	
+	
+	
 	@RequestMapping(value = "/validate", method = RequestMethod.POST)
 	public ModelAndView validateData(HttpServletRequest request,
+			HttpServletResponse response) throws SQLException, ClassNotFoundException {
+
+		ModelAndView model = new ModelAndView();
+		String user = request.getParameter("username");
+		String password = request.getParameter("password");
+
+		try {
+
+			if (DBConnectionUtil.isValidUser(DBConnectionUtil.getConnection(),
+					user, password)) {
+				model.setViewName("home");
+
+				HttpSession session = request.getSession();
+				session.setAttribute("user", user);
+
+			} else {
+				String message = "OOps!!! Invalid Username/Password";
+				request.setAttribute("message", message);
+				model.setViewName("login");
+			}
+		} catch (SQLException e) {
+			throw e;
+		} catch (ClassNotFoundException e) {
+			throw e;
+		} catch (Exception e) {
+			throw e;
+		}
+
+		return model;
+	}
+
+
+	@RequestMapping(value = "/validate1", method = RequestMethod.POST)
+	public ModelAndView validateData1(HttpServletRequest request,
 			HttpServletResponse response) {
 
 		ModelAndView model = new ModelAndView();

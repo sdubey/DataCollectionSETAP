@@ -76,6 +76,16 @@ label {
 	box-sizing: border-box
 }
 
+.btn-center-submit {
+	display: block;
+	width: 20%;
+	margin-left: 10%;
+	margin-right: 70%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box
+}
+
 .radio-inline,.checkbox-inline {
 	display: inline-block;
 	padding-top: 10px;

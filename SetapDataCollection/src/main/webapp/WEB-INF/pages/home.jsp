@@ -29,7 +29,19 @@
 			class logs through electronic form based entries. <br><br>
 			b)  <a href="export_logs"> View/Export Class logs</a> This feature allows to do the export/print
 			the data of all the logs entered by the instructor. <br><br>
-			</p>		
+			
+			
+			
+			</p>
+			
+				<div class="row-fluid">
+					<div class="span12">
+						<button class="btn-primary btn-center-submit" type="submit">Enter Class logs</button><br>
+						<button class="btn-primary btn-center-submit" type="submit">View/Export Class logs</button>
+						<br>
+					</div>
+				</div>
+				
 		</div>
 		
 		<div id="modal-footer" class="modal-footer">

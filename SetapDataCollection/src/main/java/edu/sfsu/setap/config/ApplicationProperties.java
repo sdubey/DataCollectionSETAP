@@ -43,9 +43,9 @@ public class ApplicationProperties {
 
 	public ApplicationProperties()
 	{
-	    this.database="jdbc:mysql://localhost:3306/test";
-		this.dbpassword="Password1";
-		this.dbuser= "root";
+	    this.database="jdbc:mysql://setapproject.org/student_sonal";
+		this.dbpassword="sfsu2014";
+		this.dbuser= "sdubey";
 		this.driverClass="com.mysql.jdbc.Driver";
 	
 	}
