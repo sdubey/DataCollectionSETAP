@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import edu.sfsu.setap.model.InstructionLogBean;
 import edu.sfsu.setap.model.CheckPointBean;
@@ -272,5 +274,54 @@ public class DBConnectionUtil {
 		return lst;
 
 	}
+	
+	
+	public static HashMap<Integer,String> getDefaultSettings(
+			Connection connection) {
+		Statement statement = null;
+		ResultSet resultSet = null;
+		HashMap<Integer,String> map = new HashMap<Integer,String>();
 
+		try {
+
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery("select Semester.SemesterId,Semester.abbreviation  from Semester,default_settings" +
+					" where Semester.SemesterId = default_settings.currentSemester; ");
+
+			while (resultSet.next()) {
+								
+			map.put(resultSet.getInt("SemesterId"), resultSet.getString("abbreviation"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return map;
+
+	}
+
+	
+	public static HashMap<Integer,String> getAllSemesters(
+			Connection connection) {
+		Statement statement = null;
+		ResultSet resultSet = null;
+		HashMap<Integer,String> map = new HashMap<Integer,String>();
+
+		try {
+
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery("SELECT * FROM  `Semester` ");
+
+			while (resultSet.next()) {
+								
+			map.put(resultSet.getInt("SemesterId"), resultSet.getString("abbreviation"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return map;
+
+	}
+	
 }

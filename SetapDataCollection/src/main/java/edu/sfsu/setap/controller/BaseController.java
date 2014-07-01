@@ -136,36 +136,6 @@ public class BaseController {
 	}
 
 
-	@RequestMapping(value = "/validate1", method = RequestMethod.POST)
-	public ModelAndView validateData1(HttpServletRequest request,
-			HttpServletResponse response) {
-
-		ModelAndView model = new ModelAndView();
-		String user = request.getParameter("username");
-		String password = request.getParameter("password");
-
-		try {
-
-			if (DBConnectionUtil.isValidUser(DBConnectionUtil.getConnection(),
-					user, password)) {
-				model.setViewName("home");
-
-				HttpSession session = request.getSession();
-				session.setAttribute("user", user);
-
-			} else {
-				String message = "OOps!!! Invalid Username/Password";
-				request.setAttribute("message", message);
-				model.setViewName("login");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		return model;
-	}
 
 	@RequestMapping(value = "/addInstruction", method = RequestMethod.POST)
 	public ModelAndView addInstruction(HttpServletRequest request,
