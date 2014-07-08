@@ -1,7 +1,8 @@
 package edu.sfsu.setap.model;
 
 public class InstructionLogBean {
-
+	
+	
 	String instructor;
 	int team;
 	String meeting_date;

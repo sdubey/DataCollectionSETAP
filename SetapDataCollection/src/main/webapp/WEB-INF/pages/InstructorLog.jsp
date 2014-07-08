@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" import="edu.sfsu.setap.model.*,edu.sfsu.setap.db.*,java.util.Map"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -131,13 +131,18 @@ input[type=radio] {
 				<div class="row-fluid">
 					<div class="span6">
 						<div class="mycontent-left">
-							<select name="select_instructor" id="select_instructor"
-								title="Instructor">
-								<option value="Marc">Marc</option>
-								<option value="John">John</option>
-								<option value="Maria">Maria</option>
-								<option value="" selected="selected">Select Instructor</option>
+						<select name="select_instructor" id="select_instructor" title="Instructor">
+							<option value="" selected="selected">Select Instructor</option>
+							<%
+							for (Map.Entry<Integer, String> entry : DBConnectionUtil
+									.getInstructors(DBConnectionUtil.getConnection()).entrySet()) {
+							%>		  
+							<option value=<%= entry.getValue()%>><%= entry.getValue()%></option>
+							<%
+							}
+							%>
 							</select><br><br>
+						
 							<select  name="select_team" id="select_team">
 								<option value="1">1</option>
 								<option value="2">2</option>

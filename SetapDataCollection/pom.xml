@@ -4,9 +4,10 @@
 	<groupId>edu.sfsu.setap</groupId>
 	<artifactId>SetapDataCollection</artifactId>
 	<packaging>war</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 	<name>SetapDataCollection Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+
 	<properties>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<junit.version>4.11</junit.version>
@@ -18,6 +19,26 @@
 
 
 	<dependencies>
+
+		
+		<dependency>
+		    <groupId>org.codemonkey.simplejavamail</groupId>
+		    <artifactId>simple-java-mail</artifactId>
+		    <version>2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.8.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+
 
 		<!-- JSTL Lib -->
 		<dependency>
@@ -66,26 +87,35 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
-<build>
+
+
+	<build>
 		<plugins>
+
+
+
 			<!-- Maven Tomcat Plugin -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<configuration>
-					<url>http://setapproject.org:8080/manager/html</url>
+					<url>http://setapproject.org:8080/manager/text</url>
 					<server>TomcatServer</server>
 					<path>/SetapDataCollection</path>
 				</configuration>
 			</plugin>
 			<!-- Maven compiler plugin -->
+
+
+			<!-- Maven compiler plugin -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 		</plugins>

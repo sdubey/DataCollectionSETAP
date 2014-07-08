@@ -135,8 +135,7 @@ public class BaseController {
 		return model;
 	}
 
-
-
+	
 	@RequestMapping(value = "/addInstruction", method = RequestMethod.POST)
 	public ModelAndView addInstruction(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -184,6 +183,55 @@ public class BaseController {
 
 		return model;
 	}
+
+
+	/*@RequestMapping(value = "/addInstruction", method = RequestMethod.POST)
+	public ModelAndView addInstruction(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		ModelAndView model = new ModelAndView("instruction_log_success");
+
+		HttpSession session = request.getSession(false);
+
+		if (session.getAttribute("user") == null) {
+			model = new ModelAndView("login");
+		} else {
+
+			String instructor = request.getParameter("select_instructor");
+			int team = Integer.parseInt(request.getParameter("select_team"));
+			String meeting_date = request.getParameter("meeting_date");
+			String meetingReason = request.getParameter("meetingReason");
+			int absent_member = Integer.parseInt(request
+					.getParameter("Choose_absent_member"));
+			String textarea_reason = request.getParameter("textarea_reason");
+			int team_lead_effectiveness = Integer.parseInt(request
+					.getParameter("team_lead_effectiveness"));
+			int team_effectiveness = Integer.parseInt(request
+					.getParameter("team_effectiveness"));
+
+			InstructionLogBean instruction_bean = new InstructionLogBean();
+			instruction_bean.setInstructor(instructor);
+			instruction_bean.setTeam(team);
+			instruction_bean.setMeeting_date(meeting_date);
+			instruction_bean.setMeetingReason(meetingReason);
+			instruction_bean.setAbsent_member(absent_member);
+			instruction_bean.setTextarea_reason(textarea_reason);
+			instruction_bean.setTeam_effectiveness(team_effectiveness);
+			instruction_bean
+					.setTeam_lead_effectiveness(team_lead_effectiveness);
+
+			try {
+				DBConnectionUtil.addRecordInstruction(
+						DBConnectionUtil.getConnection(), instruction_bean);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return model;
+	}*/
 
 	@RequestMapping(value = "/deleteRecord", method = RequestMethod.GET)
 	public void DeleteData(HttpServletRequest request,

@@ -1,6 +1,7 @@
 package edu.sfsu.setap.db;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,10 +10,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import edu.sfsu.setap.model.InstructionLogBean;
 import edu.sfsu.setap.model.CheckPointBean;
+import edu.sfsu.setap.model.InstructorLogsBean;
 import edu.sfsu.setap.config.ApplicationProperties;
 public class DBConnectionUtil {
 
@@ -48,6 +48,54 @@ public class DBConnectionUtil {
 		return false;
 	}
 
+	
+	public static int addInstructiorLogs(Connection connection,
+			InstructorLogsBean instructor_log) {
+		int autoIncKeyFromFunc = -1;
+		PreparedStatement preparedStatement = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		String inserStatement = "insert into InstructorLogsId values(null,?,?,?,?,?,?,?,?,?)";
+		
+		try {
+			preparedStatement = connection.prepareStatement(inserStatement);
+
+			stmt = connection.createStatement();
+			preparedStatement.setInt(1, instructor_log.getSemesterId());
+			preparedStatement.setInt(2, instructor_log.getSetapUserId());
+			preparedStatement.setInt(3, instructor_log.getTeamId());
+			preparedStatement.setDate(4, (Date) instructor_log.getMeetingDate());
+			preparedStatement.setString(5, instructor_log.getMeetingReason());
+			preparedStatement.setInt(6, instructor_log.getAbsentMembers());
+			preparedStatement.setString(7,instructor_log.getAbsenceReason());
+			preparedStatement.setInt(8, instructor_log.getTeamLeadEffectiveness());
+			preparedStatement.setInt(9, instructor_log.getTeamEffectiveness());
+
+			System.out.println("prepared ststement is " + preparedStatement);
+
+			preparedStatement.executeUpdate();
+
+			rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
+
+			if (rs.next()) {
+				autoIncKeyFromFunc = rs.getInt(1);
+			} else {
+			}
+
+			rs.close();
+
+			System.out.println("Key returned from "
+					+ "'SELECT LAST_INSERT_ID()': " + autoIncKeyFromFunc);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return autoIncKeyFromFunc;
+
+	}
+	
+	
 	public static int addRecordInstruction(Connection connection,
 			InstructionLogBean instructor_log) {
 		int autoIncKeyFromFunc = -1;
@@ -285,8 +333,8 @@ public class DBConnectionUtil {
 		try {
 
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery("select Semester.SemesterId,Semester.abbreviation  from Semester,default_settings" +
-					" where Semester.SemesterId = default_settings.currentSemester; ");
+			resultSet = statement.executeQuery("select semester.semesterId,semester.abbreviation  from semester,defaultSettings " +
+					"where semester.SemesterId = defaultSettings.currentSemester;");
 
 			while (resultSet.next()) {
 								
@@ -301,6 +349,31 @@ public class DBConnectionUtil {
 	}
 
 	
+	
+	public static HashMap<Integer,String> getInstructors(
+			Connection connection) {
+		Statement statement = null;
+		ResultSet resultSet = null;
+		HashMap<Integer,String> map = new HashMap<Integer,String>();
+
+		try {
+
+			statement = connection.createStatement();
+			String query ="select instructorId,CONCAT(title,\" \",nameFirst,\" \",nameLast,\" \",nameSuffix) from  instructor";
+			resultSet = statement.executeQuery(query);
+
+			while (resultSet.next()) {
+								
+			map.put(resultSet.getInt(1), resultSet.getString(2));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return map;
+
+	}
+	
 	public static HashMap<Integer,String> getAllSemesters(
 			Connection connection) {
 		Statement statement = null;
@@ -310,11 +383,11 @@ public class DBConnectionUtil {
 		try {
 
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM  `Semester` ");
+			resultSet = statement.executeQuery("SELECT * FROM  `semester` ");
 
 			while (resultSet.next()) {
 								
-			map.put(resultSet.getInt("SemesterId"), resultSet.getString("abbreviation"));
+			map.put(resultSet.getInt("semesterId"), resultSet.getString("abbreviation"));
 			}
 
 		} catch (SQLException e) {
