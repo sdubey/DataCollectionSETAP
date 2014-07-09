@@ -29,7 +29,7 @@
 
 <script type="text/javascript">
 $(document).ready( function () {
-    $('#example').dataTable( {
+    $('#instructorLogs').dataTable( {
         "sDom": 'T<"clear">lfrtip',
         "oTableTools": {
             "sSwfPath": "resources/swf/copy_csv_xls_pdf.swf"
@@ -49,32 +49,28 @@ $(document).ready( function () {
 		
 		<div id="demo_jui">
 		
-<table id="example" class="display">
+<table id="instructorLogs" class="display">
 				<thead>
-					<tr>
-					
+					<tr>	
 					  <th>Instructor</th>  
   					  <th>Team</th>  
   					  <th>Date</th> 
   					  <th>Reason</th>  
   					  <th>Absence</th> 
-  					  <th>Reason</th>  
   					  <th>Lead_effect</th>  
   					  <th>Team_effect</th>
 					</tr>
 				</thead>
 				<tbody>
-					<% for(InstructionLogBean c: DBConnectionUtil.getInstructionLogData(DBConnectionUtil.getConnection())){ %>
-					<tr id="<%=c.getLog_id()%>">
-						<td><%=c.getInstructor()%></td>
-						<td><%=c.getTeam()%></td>
-						<td><%=c.getMeeting_date()%></td>
-						<td><%=c.getTextarea_reason()%></td>
-						<td><%=c.getAbsent_member()%></td>
-						<td><%=c.getTextarea_reason()%></td>
-						<td><%=c.getTeam_lead_effectiveness()%></td>
-						<td><%=c.getTeam_effectiveness()%></td>
-						
+					<% for(InstructorLogsBean instructionLog: DBConnectionUtil.getInstructionLogData(DBConnectionUtil.getConnection())){ %>
+					<tr id="<%=instructionLog.getInstructorLogsId()%>">
+					    <td><%=instructionLog.getSetapUserId()%></td>
+						<td><%=instructionLog.getTeamId()%></td>
+						<td><%=instructionLog.getMeetingDate()%></td>
+						<td><%=instructionLog.getMeetingReason()%></td>
+						<td><%=instructionLog.getAbsentMembers()%></td>
+						<td><%=instructionLog.getTeamLeadEffectiveness()%></td>
+						<td><%=instructionLog.getTeamEffectiveness()%></td>
 					</tr>
 					<% } %>
 				</tbody>

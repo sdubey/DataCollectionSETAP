@@ -192,7 +192,7 @@ public class BaseController {
 			instruction_bean.setSetapUserId(instructorId);
 			instruction_bean.setTeamId(teamId);
 			instruction_bean.setMeetingDate(meetingDate);
-			instruction_bean.setMeetingDate(meetingReason);
+			instruction_bean.setMeetingReason(meetingReason);
 			instruction_bean.setAbsentMembers(absentMember);
 			if (absenceReason!=null)
 			{

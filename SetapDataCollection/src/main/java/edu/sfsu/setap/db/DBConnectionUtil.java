@@ -72,7 +72,7 @@ public class DBConnectionUtil extends HttpServlet {
 			preparedStatement.setString(7,instructor_log.getAbsenceReason());
 			preparedStatement.setInt(8, instructor_log.getTeamLeadEffectiveness());
 			preparedStatement.setInt(9, instructor_log.getTeamEffectiveness());
-
+			
 			System.out.println("prepared ststement is " + preparedStatement);
 
 			preparedStatement.executeUpdate();
@@ -242,33 +242,33 @@ public class DBConnectionUtil extends HttpServlet {
 		return lst;
 
 	}
-
-/*	public static List<InstructionLogBean> getInstructionLogData(
+	
+	public static List<InstructorLogsBean> getInstructionLogData(
 			Connection connection) {
 		Statement statement = null;
 		ResultSet resultSet = null;
-		List<InstructionLogBean> lst = new ArrayList<InstructionLogBean>();
+		List<InstructorLogsBean> lst = new ArrayList<InstructorLogsBean>();
 
 		try {
 
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery("select * from InstructionLogs");
+			resultSet = statement.executeQuery("select * from instructorLogs");
 
 			while (resultSet.next()) {
-				InstructionLogBean obj = new InstructionLogBean();
-				obj.setTeam(resultSet.getInt("team"));
-				obj.setSemester(resultSet.getString("semester"));
-				obj.setInstructor(resultSet.getString("instructor"));
-				obj.setMeeting_date(resultSet.getString("meeting_date"));
-				obj.setAbsent_member(resultSet.getInt("absent_member"));
-				obj.setTextarea_reason(resultSet.getString("absence_reason"));
-				obj.setTeam_lead_effectiveness(resultSet
-						.getInt("team_lead_effectiveness"));
-				obj.setTeam_effectiveness(resultSet
-						.getInt("team_effectiveness"));
-				obj.setLog_id(resultSet.getInt("log_id"));
-
-				lst.add(obj);
+				InstructorLogsBean instructorLogs = new InstructorLogsBean();
+				
+				instructorLogs.setInstructorLogsId(resultSet.getInt("instructorLogsId"));
+				instructorLogs.setSemesterId(resultSet.getInt("semesterId"));
+				instructorLogs.setSetapUserId(resultSet.getInt("setapUserId"));
+				instructorLogs.setTeamId(resultSet.getInt("teamId"));
+				instructorLogs.setMeetingDate(resultSet.getString("meetingDate"));
+				instructorLogs.setMeetingReason(resultSet.getString("meetingReason"));
+				instructorLogs.setAbsentMembers(resultSet.getInt("absentMember"));
+				instructorLogs.setTeamEffectiveness(resultSet.getInt("teamEffectiveness"));
+				instructorLogs.setTeamLeadEffectiveness(resultSet.getInt("teamEffectiveness"));
+				
+				
+				lst.add(instructorLogs);
 			}
 
 		} catch (SQLException e) {
@@ -276,7 +276,7 @@ public class DBConnectionUtil extends HttpServlet {
 		}
 		return lst;
 
-	}*/
+	}
 	
 	
 	public static HashMap<Integer,String> getDefaultSettings(
