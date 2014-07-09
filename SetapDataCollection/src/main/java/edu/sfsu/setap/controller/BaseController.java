@@ -63,6 +63,19 @@ public class BaseController {
 	}
 	
 	
+	@RequestMapping(value = "/testAction", method = RequestMethod.GET)
+	public ModelAndView testAction(HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		String term = request.getParameter("select_term"); 
+		System.out.println(request.getParameter("select_term"));
+		System.out.println("I am here yuhoooooo");
+		HttpSession session = request.getSession();
+		session.setAttribute("term", term);
+		ModelAndView model = new ModelAndView("home");
+		return model;
+		
+	}
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public ModelAndView test(HttpServletRequest request,

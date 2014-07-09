@@ -43,6 +43,7 @@ public class DBConnectionUtil {
 			}
 
 		} catch (SQLException e) {
+			System.out.println(e);
 			System.out.println("Exception occured ");
 		}
 		return false;
@@ -359,7 +360,9 @@ public class DBConnectionUtil {
 		try {
 
 			statement = connection.createStatement();
-			String query ="select instructorId,CONCAT(title,\" \",nameFirst,\" \",nameLast,\" \",nameSuffix) from  instructor";
+			String query ="select instructor.instructorId,CONCAT(setapUserConfidential.nameFirst,\" \",setapUserConfidential.nameLast)" +
+					" from setapUserConfidential,setapUser,instructor where setapUserConfidential.setapUserConfidentialId =  setapUser.setapUserConfidentialId " +
+					"and instructor.setapUserId = setapUser.setapUserId";
 			resultSet = statement.executeQuery(query);
 
 			while (resultSet.next()) {

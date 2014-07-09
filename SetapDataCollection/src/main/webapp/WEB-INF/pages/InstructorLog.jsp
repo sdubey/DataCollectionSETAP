@@ -9,8 +9,7 @@
 <link
 	href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
 	rel="stylesheet">
-<script
-	src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.9.1.js"></script>
 <script
 	src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
@@ -118,7 +117,7 @@ input[type=radio] {
 		<div id="modal-header" class="modal-header">
 			<%@ include file="header.jsp"%>
 			<h3>
-				<span class="tab">Instructor Class Log</span>
+				<span class="tab">Instructor Class Logs</span>
 			</h3>
 		</div>
 		   
@@ -137,9 +136,10 @@ input[type=radio] {
 							for (Map.Entry<Integer, String> entry : DBConnectionUtil
 									.getInstructors(DBConnectionUtil.getConnection()).entrySet()) {
 							%>		  
-							<option value=<%= entry.getValue()%>><%= entry.getValue()%></option>
+							<option value=<%= entry.getKey()%>><%= entry.getValue()%></option>
 							<%
 							}
+							
 							%>
 							</select><br><br>
 						
