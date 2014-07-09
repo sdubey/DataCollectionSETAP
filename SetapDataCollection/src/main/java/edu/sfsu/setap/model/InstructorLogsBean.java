@@ -1,14 +1,13 @@
 package edu.sfsu.setap.model;
 
-import java.util.Date;
-
 public class InstructorLogsBean {
 
+	String semesterAbb;
 	int instructorLogsId ;
 	int semesterId ;
 	int setapUserId ;
 	int teamId ;
-	Date meetingDate ;
+	String meetingDate ;
 	String meetingReason ;
 	int absentMembers ;
 	String absenceReason ;
@@ -39,10 +38,10 @@ public class InstructorLogsBean {
 	public void setTeamId(int teamId) {
 		this.teamId = teamId;
 	}
-	public Date getMeetingDate() {
+	public String getMeetingDate() {
 		return meetingDate;
 	}
-	public void setMeetingDate(Date meetingDate) {
+	public void setMeetingDate(String meetingDate) {
 		this.meetingDate = meetingDate;
 	}
 	public String getMeetingReason() {
@@ -75,5 +74,12 @@ public class InstructorLogsBean {
 	public void setTeamEffectiveness(int teamEffectiveness) {
 		this.teamEffectiveness = teamEffectiveness;
 	}
+	public String getSemesterAbb() {
+		return semesterAbb;
+	}
+	public void setSemesterAbb(String semesterAbb) {
+		this.semesterAbb = semesterAbb;
+	}
+	
 	
 }

@@ -5,18 +5,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>ContactUS</title>
-<link href="resources/css/demo_page.css" rel="stylesheet"
-	type="text/css" />
-<link href="resources/css/demo_table.css" rel="stylesheet"
-	type="text/css" />
-</head>
-<body id=dt_example>
-	<div id="container">
-		<%@ include file="header.jsp"%>
-<h2>Data for the team is added successfully to the DB, continue adding data for other team, Or choose accordingly</h2>
-<a href="InstructorLog">Continue adding</a>
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script
+	src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<script
+	src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
+<link href="resources/css/setap.css" rel="stylesheet">
+</head>
+<body>
+	<div id="container">
+		<div id="modal-header" class="modal-header">
+			<%@ include file="header.jsp"%>
+			<h3>
+				<span class="tab">Contact US</span>
+			</h3>
+		</div>
+		<div class="page_content">
+			<h2>Data for the team is added successfully to the DB, continue
+				adding data for other team, Or choose accordingly from the main menu</h2>
+			<h3>To Continue adding <a href="InstructorLog"> Click Here!! </a></h3>
+
+		</div>
+
+		<div id="modal-footer" class="modal-footer">
 			<%@ include file="footer.jsp"%>
 		</div>
+	</div>
 </body>
 </html>

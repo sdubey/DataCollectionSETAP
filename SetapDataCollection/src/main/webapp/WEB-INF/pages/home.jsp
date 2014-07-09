@@ -65,9 +65,10 @@ $(document).ready(function(){
 
 					<%
 			}
+			
 			%>
-				</select> <br>
-				<br> <br>
+				</select>
+				<br><br>
 				
 			</p>
            </form>

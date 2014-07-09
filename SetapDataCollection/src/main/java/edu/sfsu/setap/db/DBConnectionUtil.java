@@ -10,17 +10,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import edu.sfsu.setap.model.InstructionLogBean;
+
+import javax.servlet.http.HttpServlet;
 import edu.sfsu.setap.model.CheckPointBean;
 import edu.sfsu.setap.model.InstructorLogsBean;
 import edu.sfsu.setap.config.ApplicationProperties;
-public class DBConnectionUtil {
+public class DBConnectionUtil extends HttpServlet {
+	
+	
+	
+	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @param args
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
 	
 	public static boolean isValidUser(Connection connection, String user_id,
 			String password) {
@@ -57,7 +57,7 @@ public class DBConnectionUtil {
 		Statement stmt = null;
 		ResultSet rs = null;
 
-		String inserStatement = "insert into InstructorLogsId values(null,?,?,?,?,?,?,?,?,?)";
+		String inserStatement = "insert into instructorLogs values(null,?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			preparedStatement = connection.prepareStatement(inserStatement);
@@ -66,7 +66,7 @@ public class DBConnectionUtil {
 			preparedStatement.setInt(1, instructor_log.getSemesterId());
 			preparedStatement.setInt(2, instructor_log.getSetapUserId());
 			preparedStatement.setInt(3, instructor_log.getTeamId());
-			preparedStatement.setDate(4, (Date) instructor_log.getMeetingDate());
+			preparedStatement.setString(4,  instructor_log.getMeetingDate());
 			preparedStatement.setString(5, instructor_log.getMeetingReason());
 			preparedStatement.setInt(6, instructor_log.getAbsentMembers());
 			preparedStatement.setString(7,instructor_log.getAbsenceReason());
@@ -97,52 +97,6 @@ public class DBConnectionUtil {
 	}
 	
 	
-	public static int addRecordInstruction(Connection connection,
-			InstructionLogBean instructor_log) {
-		int autoIncKeyFromFunc = -1;
-		PreparedStatement preparedStatement = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-
-		String inserStatement = "insert into InstructionLogs values(null,'f2014',?,?,?,?,?,?,?,?)";
-
-		try {
-			preparedStatement = connection.prepareStatement(inserStatement);
-
-			stmt = connection.createStatement();
-			preparedStatement.setString(1, instructor_log.getInstructor());
-			preparedStatement.setInt(2, instructor_log.getTeam());
-			preparedStatement.setString(3, instructor_log.getMeeting_date());
-			preparedStatement.setString(4, instructor_log.getMeetingReason());
-			preparedStatement.setInt(5, instructor_log.getAbsent_member());
-			preparedStatement.setString(6, instructor_log.getTextarea_reason());
-			preparedStatement.setInt(7,
-					instructor_log.getTeam_lead_effectiveness());
-			preparedStatement.setInt(8, instructor_log.getTeam_effectiveness());
-
-			System.out.println("prepared ststement is " + preparedStatement);
-
-			preparedStatement.executeUpdate();
-
-			rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
-
-			if (rs.next()) {
-				autoIncKeyFromFunc = rs.getInt(1);
-			} else {
-			}
-
-			rs.close();
-
-			System.out.println("Key returned from "
-					+ "'SELECT LAST_INSERT_ID()': " + autoIncKeyFromFunc);
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return autoIncKeyFromFunc;
-
-	}
-
 	public static int addRecord(Connection connection, CheckPointBean checkpoint) {
 		int autoIncKeyFromFunc = -1;
 		PreparedStatement preparedStatement = null;
@@ -289,7 +243,7 @@ public class DBConnectionUtil {
 
 	}
 
-	public static List<InstructionLogBean> getInstructionLogData(
+/*	public static List<InstructionLogBean> getInstructionLogData(
 			Connection connection) {
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -322,7 +276,7 @@ public class DBConnectionUtil {
 		}
 		return lst;
 
-	}
+	}*/
 	
 	
 	public static HashMap<Integer,String> getDefaultSettings(
@@ -358,7 +312,7 @@ public class DBConnectionUtil {
 		HashMap<Integer,String> map = new HashMap<Integer,String>();
 
 		try {
-
+			
 			statement = connection.createStatement();
 			String query ="select instructor.instructorId,CONCAT(setapUserConfidential.nameFirst,\" \",setapUserConfidential.nameLast)" +
 					" from setapUserConfidential,setapUser,instructor where setapUserConfidential.setapUserConfidentialId =  setapUser.setapUserConfidentialId " +

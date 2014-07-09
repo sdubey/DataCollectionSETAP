@@ -4,19 +4,22 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import edu.sfsu.setap.model.CheckPointBean;
-import edu.sfsu.setap.model.InstructionLogBean;
+
 import edu.sfsu.setap.db.DBConnectionUtil;
 import edu.sfsu.setap.exception.CustomGenericException;
+import edu.sfsu.setap.model.CheckPointBean;
+import edu.sfsu.setap.model.InstructorLogsBean;
 
 @Controller
 @RequestMapping("/")
@@ -161,37 +164,52 @@ public class BaseController {
 			model = new ModelAndView("login");
 		} else {
 
-			String instructor = request.getParameter("select_instructor");
-			int team = Integer.parseInt(request.getParameter("select_team"));
-			String meeting_date = request.getParameter("meeting_date");
+			int instructorId = Integer.parseInt(request.getParameter("select_instructor"));
+			int teamId = Integer.parseInt(request.getParameter("select_team"));
+			String meetingDate = request.getParameter("meeting_date");
 			String meetingReason = request.getParameter("meetingReason");
-			int absent_member = Integer.parseInt(request
+			int absentMember = Integer.parseInt(request
 					.getParameter("Choose_absent_member"));
-			String textarea_reason = request.getParameter("textarea_reason");
-			int team_lead_effectiveness = Integer.parseInt(request
+			String absenceReason = request.getParameter("textarea_reason");
+			int teamLeadEffectiveness = Integer.parseInt(request
 					.getParameter("team_lead_effectiveness"));
-			int team_effectiveness = Integer.parseInt(request
+			int teamEffectiveness = Integer.parseInt(request
 					.getParameter("team_effectiveness"));
 
-			InstructionLogBean instruction_bean = new InstructionLogBean();
-			instruction_bean.setInstructor(instructor);
-			instruction_bean.setTeam(team);
-			instruction_bean.setMeeting_date(meeting_date);
-			instruction_bean.setMeetingReason(meetingReason);
-			instruction_bean.setAbsent_member(absent_member);
-			instruction_bean.setTextarea_reason(textarea_reason);
-			instruction_bean.setTeam_effectiveness(team_effectiveness);
-			instruction_bean
-					.setTeam_lead_effectiveness(team_lead_effectiveness);
+			InstructorLogsBean instruction_bean = new InstructorLogsBean();
+			
+			
+			System.out.println("instructorId "+ instructorId);
+			System.out.println("teamId "+ teamId);
+			System.out.println("meeting_date "+ meetingDate);
+			System.out.println("meetingReason "+ meetingReason);
+			System.out.println("absent_member "+ absentMember);
+			System.out.println("textarea_reason "+ absenceReason);
+			System.out.println("team_lead_effectiveness "+ teamLeadEffectiveness);
+			System.out.println("team_effectiveness "+ teamEffectiveness);
 
+			instruction_bean.setSemesterId(6);
+			instruction_bean.setSetapUserId(instructorId);
+			instruction_bean.setTeamId(teamId);
+			instruction_bean.setMeetingDate(meetingDate);
+			instruction_bean.setMeetingDate(meetingReason);
+			instruction_bean.setAbsentMembers(absentMember);
+			if (absenceReason!=null)
+			{
+			instruction_bean.setAbsenceReason(absenceReason);
+			}else
+			{
+				instruction_bean.setAbsenceReason("No Reason provided");
+			}
+			instruction_bean.setTeamLeadEffectiveness(teamLeadEffectiveness);
+			instruction_bean.setTeamEffectiveness(teamEffectiveness);
+			
 			try {
-				DBConnectionUtil.addRecordInstruction(
-						DBConnectionUtil.getConnection(), instruction_bean);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
+				DBConnectionUtil.addInstructiorLogs(DBConnectionUtil.getConnection(), instruction_bean);
+			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}
+			
 		}
 
 		return model;

@@ -150,7 +150,7 @@ input[type=radio] {
 								<option value="4">4</option>
 								<option selected="selected" value="">Select team</option>
 							</select> <br><br>
-							 <input type="date" id="meeting_date">
+							 <input type="date" id="meeting_date" name = "meeting_date">
 						</div>
 					</div>
 					<div class="span6">
@@ -185,37 +185,47 @@ input[type=radio] {
 					</div>
 				</div>
 				<hr>
+				
 				<h4>3 - Effectiveness <label class="control-label" for="input"><span style="color: red;">(*)</span></label></h4> 
-     
-				<div class="row-fluid">
-					<div class="span6">
-						<div class="mycontent-left">
-							<p>Team's effectiveness : (1 poor, 5 excellent) </p>
-							 
-							<input type="radio" name="team_effectiveness"  value="1"> 1
-							<input type="radio" name="team_effectiveness"  value="2"> 2
-							<input type="radio" name="team_effectiveness"  value="3"> 3
-							<input type="radio" name="team_effectiveness" value="4"> 4
-							<input type="radio" name="team_effectiveness" value="5" > 5
-							
-						</div>
-					</div>
-
-					<div class="span6">
-						<div class="mycontent-right">
-							<p>Team Lead's effectiveness : (1 poor, 5 excellent)</p>
-							<h6>Below Expect  At Expect      Above Expect</h6><br>
-						 
-						 	<input type="radio" name="team_lead_effectiveness"  value="1"> 1
-							<input type="radio" name="team_lead_effectiveness"  value="2"> 2
-							<input type="radio" name="team_lead_effectiveness"  value="3"> 3
-							<input type="radio" name="team_lead_effectiveness" value="4"> 4
-							<input type="radio" name="team_lead_effectiveness" value="5" > 5
-						
-						</div>
+     <div class="row-fluid">
+				<div class="span6">
+					<div class="mycontent-left">
+						<p>Team's effectiveness : (1 poor, 5 excellent)</p>
+						 Below &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  
+						 &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp At  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+						 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Above<br>
+						 Expectataion &nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Expectataion&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+						 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Expectataion<br>
+						<label class="checkbox-inline">
+						 <input type="radio" name="team_effectiveness" value="1"> 1 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+						 <input type="radio" name="team_effectiveness" value="2"> 2 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+						 <input type="radio" name="team_effectiveness" value="3"> 3 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+						 <input type="radio" name="team_effectiveness" value="4"> 4 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+						 <input type="radio" name="team_effectiveness" value="5"> 5
+						</label>
 					</div>
 				</div>
-				<hr>
+
+				<div class="span6">
+					<div class="mycontent-right">
+						<p>Team Lead's effectiveness : (1 poor, 5 excellent)</p>
+						 Below &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  
+						 &nbsp&nbsp&nbsp &nbsp&nbsp&nbsp At  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+						 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Above<br>
+						 Expectataion &nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Expectataion&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+						 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Expectataion<br>
+						<label class="checkbox-inline">
+						 <input type="radio" name="team_lead_effectiveness" value="1"> 1 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+						 <input type="radio" name="team_lead_effectiveness" value="2"> 2 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+						 <input type="radio" name="team_lead_effectiveness" value="3"> 3 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+						 <input type="radio" name="team_lead_effectiveness" value="4"> 4 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+						 <input type="radio" name="team_lead_effectiveness" value="5"> 5
+						</label>
+					</div>
+				</div>
+			</div>
+			<br>
+			<hr>
 				<h4>4 - Checkpoints (Optional)</h4>
 				<div class="row-fluid">
 					<div class="span12">
