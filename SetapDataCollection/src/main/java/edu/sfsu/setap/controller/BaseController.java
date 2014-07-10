@@ -292,22 +292,32 @@ public class BaseController {
 			model = new ModelAndView("login");
 		} else {
 
-			String team_number = request.getParameter("team_number");
-			String creation_date = request.getParameter("creation_date");
-			String due_date = request.getParameter("due_date");
-			String issue_status = request.getParameter("issue_status");
-			String closed_date = request.getParameter("closed_date");
+			int teamNumber = Integer.parseInt(request.getParameter("team_number"));
+			String creationDate = request.getParameter("creation_date");
+			String dueDate = request.getParameter("due_date");
+			String issueStatus = request.getParameter("issue_status");
+			String closedDate = request.getParameter("closed_date");
 			String description = request.getParameter("description");
 
+			
+			
+			System.out.println("team_number "+teamNumber);
+			System.out.println("creation_date"+creationDate);
+			System.out.println("due_date"+dueDate);
+			System.out.println("issue_status"+issueStatus);
+			System.out.println("closed_date"+closedDate);
+			System.out.println("description"+description);
+			
+			
 			try {
 
 				CheckPointBean check_point = new CheckPointBean();
-				check_point.setTeam_number(team_number);
-				check_point.setCreation_date(myFormat.format(fromUser.parse(creation_date)));
-				check_point.setDue_date(myFormat.format(fromUser.parse(due_date)));
-				check_point.setClosed_date(myFormat.format(fromUser.parse(closed_date)));
+				check_point.setTeamId(2);
+				check_point.setCreationDate(myFormat.format(fromUser.parse(creationDate)));
+				check_point.setDueDate(myFormat.format(fromUser.parse(dueDate)));
+				check_point.setClosedDate(myFormat.format(fromUser.parse(closedDate)));
 				check_point.setDescription(description);
-				check_point.setIssue_status(issue_status);
+				check_point.setIssueStatus(issueStatus);
 
 				int id = DBConnectionUtil.addRecord(
 						DBConnectionUtil.getConnection(), check_point);
@@ -321,7 +331,7 @@ public class BaseController {
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
 		}
 		return model;
 

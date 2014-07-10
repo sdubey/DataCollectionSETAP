@@ -85,17 +85,17 @@
 				</thead>
 				<tbody>
 					<% for(CheckPointBean c: DBConnectionUtil.getDBData(DBConnectionUtil.getConnection())){ %>
-					<tr id="<%=c.getCheck_pointID()%>">
-						<td><%=c.getIssue_status()%></td>
-						<td><%=c.getTeam_number()%></td>
-						<td><%=c.getCreation_date()%></td>
-						<td><%=c.getDue_date()%></td>
-						<td><%=c.getClosed_date()%></td>
+					<tr id="<%=c.getCheckPointID()%>">
+						<td><%=c.getIssueStatus()%></td>
+						<td><%=c.getTeamId()%></td>
+						<td><%=c.getCreationDate()%></td>
+						<td><%=c.getDueDate()%></td>
+						<td><%=c.getClosedDate()%></td>
 						<td><%=c.getDescription()%></td>
-						<td><%=c.getEmail_notification()%></td>
+						<td><%=c.getEmailNotificationStatus()%></td>
 						<td>
 							<form method="POST" action="sendemail">
-								<input name="checkPointId" type="hidden" value="<%=c.getCheck_pointID()%>">
+								<input name="checkPointId" type="hidden" value="<%=c.getCheckPointID()%>">
 								<input type="submit" value="Send Email">
 							</form>
 						</td>

@@ -1,7 +1,6 @@
 package edu.sfsu.setap.db;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -103,21 +102,33 @@ public class DBConnectionUtil extends HttpServlet {
 		Statement stmt = null;
 		ResultSet rs = null;
 
-		// String deleteSQL = "insert into checkpoints values(?,?,?,?,?) ";
+		
+		String insertSQL = "INSERT INTO checkpoints" +
+				"(checkPointID," +
+				"teamId," +
+				"creationDate," +
+				"dueDate," +
+				"issueStatus," +
+				"closedDate," +
+				"description," +
+				"emailNotificationStatus) " +
+				"VALUES (null,?,?,?,?,?,?,?)";
 
-		String insertSQL = "insert into checkpoints values (null,'S2014',?,?,?,?,?,?,'Y')";
+		
+		System.out.println("insertSQL " + insertSQL);
 
 		try {
 			preparedStatement = connection.prepareStatement(insertSQL);
 
 			stmt = connection.createStatement();
-
-			preparedStatement.setString(1, checkpoint.getTeam_number());
-			preparedStatement.setString(2, checkpoint.getCreation_date());
-			preparedStatement.setString(3, checkpoint.getDue_date());
-			preparedStatement.setString(4, checkpoint.getIssue_status());
-			preparedStatement.setString(5, checkpoint.getClosed_date());
+			
+			preparedStatement.setInt(1, checkpoint.getTeamId());
+			preparedStatement.setString(2, checkpoint.getCreationDate());
+			preparedStatement.setString(3, checkpoint.getDueDate());
+			preparedStatement.setString(4, checkpoint.getIssueStatus());
+			preparedStatement.setString(5, checkpoint.getClosedDate());
 			preparedStatement.setString(6, checkpoint.getDescription());
+			preparedStatement.setString(7, "N");
 
 			System.out.println("prepared ststement is " + preparedStatement);
 
@@ -172,22 +183,22 @@ public class DBConnectionUtil extends HttpServlet {
 		String field = null;
 
 		if (colIdx == 0)
-			field = "issue_status";
+			field = "issueStatus";
 		else if (colIdx == 1)
-			field = "team_number";
+			field = "teamId";
 		else if (colIdx == 2)
-			field = "creation_date";
+			field = "creationDate";
 		else if (colIdx == 3)
-			field = "due_date";
+			field = "dueDate";
 		else if (colIdx == 4)
-			field = "closed_date";
+			field = "closedDate";
 		else if (colIdx == 5)
 			field = "description";
 		else {
 		}
 		PreparedStatement preparedStatement = null;
 		String updateStatement = "update checkpoints set " + field
-				+ " = ? where check_pointID = " + id;
+				+ " = ? where checkPointID = " + id;
 
 		preparedStatement = connection.prepareStatement(updateStatement);
 		preparedStatement.setString(1, updatedValue);
@@ -199,7 +210,7 @@ public class DBConnectionUtil extends HttpServlet {
 	public static void deleteRecord(int id, Connection connection) {
 		PreparedStatement preparedStatement = null;
 
-		String deleteSQL = "delete from checkpoints where check_pointID = ?";
+		String deleteSQL = "delete from checkpoints where checkPointID = ?";
 		try {
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, id);
@@ -211,6 +222,7 @@ public class DBConnectionUtil extends HttpServlet {
 
 	}
 
+	
 	public static List<CheckPointBean> getDBData(Connection connection) {
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -223,16 +235,16 @@ public class DBConnectionUtil extends HttpServlet {
 
 			while (resultSet.next()) {
 				CheckPointBean obj = new CheckPointBean();
-				obj.setCheck_pointID(resultSet.getString("check_pointID"));
-				obj.setClass_session(resultSet.getString("class_session"));
-				obj.setClosed_date(resultSet.getString("closed_date"));
-				obj.setCreation_date(resultSet.getString("creation_date"));
+				obj.setCheckPointID(Integer.parseInt(resultSet.getString("checkPointID")));
+				obj.setTeamId(Integer.parseInt(resultSet.getString("teamId")));
+				obj.setCreationDate(resultSet.getString("creationDate"));
+				obj.setClosedDate(resultSet.getString("closedDate"));
+				obj.setDueDate(resultSet.getString("dueDate"));
+				obj.setIssueStatus(resultSet.getString("issueStatus"));
 				obj.setDescription(resultSet.getString("description"));
-				obj.setDue_date(resultSet.getString("due_date"));
-				obj.setEmail_notification(resultSet
-						.getString("email_notification"));
-				obj.setIssue_status(resultSet.getString("issue_status"));
-				obj.setTeam_number(resultSet.getString("team_number"));
+				obj.setEmailNotificationStatus(resultSet
+						.getString("emailNotificationStatus"));
+				
 				lst.add(obj);
 			}
 
