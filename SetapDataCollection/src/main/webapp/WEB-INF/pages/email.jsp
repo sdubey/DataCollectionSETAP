@@ -5,16 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>email</title>
-<link href="resources/css/demo_page.css" rel="stylesheet" type="text/css" />
-<link href="resources/css/demo_table.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="resources/bootstrap/js/bootstrap.min.js">
+<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
+<link href="resources/css/setap.css" rel="stylesheet">
 </head>
-<body id=dt_example>
-	<div id="container">
-	   <%@ include file="header.jsp"%>
-		<h2>SETAP email</h2>
-		<div id="column" style="background-color:#FFFFFF;float:center;">
-		
-		<form action="checkpoints" method="get">
+<div id="container">
+		<div id="modal-header" class="modal-header">
+			<%@ include file="header.jsp"%>
+			
+			<form action="checkpoints" method="get">
 		    <p>Email address: <input name="email" value="jDoe@mail.sfsu.edu"></p>
 		    <p>Mail subject: <input name="subject" value="OPEN -Checkpoint- 2014-03-19 -Team 5"></p>
 		    <p>Mail message: <textarea name ="text_area" >this is a sample check point</textarea></p>
@@ -24,10 +23,11 @@
 		    <input type="submit"  value = "send mail" align="right" ></p>
 		    <br><br>
 		</form>
-	</div>
-	<div id="footer">
-		<%@ include file="footer.jsp"%>
-	</div>
+			
+		</div>
+			<div id="modal-footer" class="modal-footer">
+			<%@ include file="footer.jsp"%>
+		</div>
 	</div>
 </body>
 </html>
